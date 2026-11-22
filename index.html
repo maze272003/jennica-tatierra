@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Jennica Tatierra, a Grade 12 Humanities and Social Sciences student at Datamex College — her story, works, and dreams.">
+  <meta name="theme-color" content="#f8c8dc">
+  <title>💖 Jennica Tatierra | Portfolio</title>
+  <style>
+    /* ==========================================================================
+       Design tokens
+       ========================================================================== */
+    :root {
+      --color-bg: #fff5f9;
+      --color-surface: #ffffff;
+      --color-text: #5a2a3f;
+      --color-text-muted: #874565;
+      --color-heading: #ad4b7a;
+      --color-accent: #e07aa8;
+      --color-accent-soft: #f4a5c1;
+      --color-pink-soft: #fff0f6;
+      --color-box: #fef4f8;
+      --color-dotted: #f4c2d4;
+      --color-note: #997888;
+      --color-memory: #fce4ec;
+      --color-memory-icon: #d88eaf;
+      --color-works-title: #d16b95;
+
+      --gradient-nav: linear-gradient(135deg, #f8c8dc, #f4a5c1);
+      --gradient-hero: linear-gradient(135deg, #fff0f6, #ffeaf2);
+
+      --shadow-nav: 0 4px 15px rgba(244, 165, 193, 0.3);
+      --shadow-profile: 0 6px 18px rgba(173, 75, 122, 0.25);
+      --shadow-section: 0 5px 20px rgba(244, 165, 193, 0.15);
+
+      --radius-pill: 25px;
+      --radius-card: 20px;
+      --radius-inner: 15px;
+
+      --content-width: 900px;
+      --nav-width: 1100px;
+      --page-gutter: 20px;
+      --nav-height: 56px;
+    }
+
+    /* ==========================================================================
+       Base
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 12px);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--color-heading);
+      outline-offset: 2px;
+    }
+
+    main:focus {
+      outline: none;
+    }
+
+    /* ==========================================================================
+       Accessibility
+       ========================================================================== */
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 200;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background-color: var(--color-surface);
+      color: var(--color-heading);
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(90, 42, 63, 0.2);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 14px;
+    }
+
+    /* ==========================================================================
+       Navigation
+       ========================================================================== */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 5px 0;
+      background: var(--gradient-nav);
+      box-shadow: var(--shadow-nav);
+    }
+
+    .nav-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      max-width: var(--nav-width);
+      margin: 0 auto;
+      padding: 0 var(--page-gutter);
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      color: var(--color-text);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-list a:hover {
+      background-color: var(--color-surface);
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .nav-list a:focus-visible {
+      background-color: var(--color-surface);
+      color: var(--color-accent);
+    }
+
+    /* ==========================================================================
+       Hero
+       ========================================================================== */
+    .hero {
+      padding: clamp(36px, 8vw, 50px) var(--page-gutter);
+      background: var(--gradient-hero);
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: clamp(150px, 42vw, 180px);
+      height: auto;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 20px;
+      object-fit: cover;
+      border: 5px solid var(--color-surface);
+      border-radius: 50%;
+      box-shadow: var(--shadow-profile);
+    }
+
+    .hero h1 {
+      margin-bottom: 10px;
+      color: var(--color-heading);
+      font-size: clamp(1.7rem, 5.5vw, 2.5rem);
+    }
+
+    .hero-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-tagline {
+      margin-top: 24px;
+      font-size: 1rem;
+    }
+    /* ==========================================================================
+       Sections
+       ========================================================================== */
+    .content-section {
+      width: calc(100% - var(--page-gutter) - var(--page-gutter));
+      max-width: var(--content-width);
+      margin: clamp(20px, 5vw, 40px) auto;
+      padding: clamp(20px, 3.5vw, 30px);
+      background-color: var(--color-surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-section);
+    }
+
+    .content-section h2 {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px dotted var(--color-dotted);
+      color: var(--color-heading);
+      font-size: clamp(1.4rem, 4.4vw, 1.6rem);
+    }
+
+    /* About */
+    #about p + p {
+      margin-top: 10px;
+    }
+
+    /* Interests */
+    .interest-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .interest-item {
+      padding: 15px 20px;
+      border-radius: var(--radius-inner);
+      background-color: var(--color-pink-soft);
+    }
+
+    .interest-note {
+      margin-top: 15px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Works */
+    .work + .work {
+      margin-top: 40px;
+    }
+
+    .work-title {
+      margin-bottom: 10px;
+      color: var(--color-works-title);
+      font-size: 1.17rem;
+    }
+
+    .poem-box,
+    .story-box {
+      padding: clamp(20px, 3.5vw, 25px);
+      border-left: 4px solid var(--color-accent-soft);
+      border-radius: var(--radius-inner);
+      background-color: var(--color-box);
+    }
+
+    .poem-box p {
+      font-style: italic;
+      line-height: 1.9;
+    }
+
+    .story-box p + p {
+      margin-top: 12px;
+    }
+
+    /* Future */
+    #future p + p {
+      margin-top: 12px;
+    }
+
+    /* Achievements */
+    .achievements-intro {
+      margin-bottom: 10px;
+    }
+
+    .memories-placeholder {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 120px);
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .memory-card {
+      display: grid;
+      place-items: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      background-color: var(--color-memory);
+      color: var(--color-memory-icon);
+      font-size: 30px;
+    }
+
+    .achievements-note {
+      margin-top: 15px;
+      color: var(--color-note);
+      font-size: 14px;
+    }
+
+    /* Contact */
+    .contact-info p {
+      margin: 10px 0;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-info a {
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 25px;
+      background-color: #f8c8dc;
+      color: var(--color-text);
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .copyright {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    /* ==========================================================================
+       Responsive
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .nav-list {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+      }
+
+      .nav-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-list li {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+      }
+
+      .nav-list li:first-child {
+        margin-left: auto;
+      }
+
+      .nav-list li:last-child {
+        margin-right: auto;
+      }
+
+      .nav-list a {
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .memories-placeholder {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .memory-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .nav-list a,
+      .skip-link {
+        transition: none;
+      }
+
+      .nav-list a:hover {
+        transform: none;
+      }
+    }
+
+    @media print {
+      .site-nav,
+      .skip-link {
+        display: none;
+      }
+
+      body {
+        background-color: #ffffff;
+        color: #000000;
+      }
+
+      .hero,
+      .content-section,
+      .site-footer {
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .content-section {
+        width: 100%;
+        max-width: none;
+        margin: 0 0 24px;
+        padding: 0;
+        border-radius: 0;
+      }
+
+      .profile-pic {
+        box-shadow: none;
+      }
+
+      .contact-info a {
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="site-nav" aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="#home">🏠 Home</a></li>
+      <li><a href="#about">🌸 About</a></li>
+      <li><a href="#interests">✨ Interests</a></li>
+      <li><a href="#works">📂 My Works</a></li>
+      <li><a href="#future">🎓 My Future</a></li>
+      <li><a href="#achievements">🏆 Achievements</a></li>
+      <li><a href="#contact">💌 Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home -->
+  <header class="hero" id="home">
+    <img src="profile.jpg" alt="Jennica Tatierra" class="profile-pic" width="180" height="180" decoding="async">
+    <h1>💖 Jennica Tatierra 💖</h1>
+    <p class="hero-subtitle">Grade 12 HUMSS Student | Datamex College</p>
+    <p class="hero-tagline"><em>"With hope in my heart and stars in my eyes, I know my future will be beautiful and bright."</em> ✨</p>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- About -->
+    <section class="content-section" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">🌸 About Me</h2>
+      <p>Hello, everyone!</p>
+      <p>I'm <strong>Jennica Tatierra</strong>, and I'm currently a Grade 12 student taking the <strong>Humanities and Social Sciences (HUMSS)</strong> strand at <strong>Datamex College</strong>.</p>
+      <p>I believe that kindness matters, dreams are worth chasing, and every person has a story worth telling. Thank you for visiting my portfolio! 🌷</p>
+    </section>
+
+    <!-- Interests -->
+    <section class="content-section" id="interests" aria-labelledby="interests-title">
+      <h2 id="interests-title">✨ My Interests</h2>
+      <ul class="interest-list">
+        <li class="interest-item">
+          <strong>💗 All Things Girly</strong>
+          <p>Pretty details and cute stuff just make me happy!</p>
+        </li>
+        <li class="interest-item">
+          <strong>🎀 Pink</strong>
+          <p>It's soft and always brightens my day. It's not just a color — it's happiness!</p>
+        </li>
+        <li class="interest-item">
+          <strong>🎬 K-Dramas</strong>
+          <p>I really enjoy watching them — they're so fun and relaxing!</p>
+        </li>
+      </ul>
+      <p class="interest-note">These little things simply make me happy. 💖</p>
+    </section>
+
+    <!-- Works -->
+    <section class="content-section" id="works" aria-labelledby="works-title">
+      <h2 id="works-title">📂 My Works</h2>
+
+      <article class="work">
+        <h3 class="work-title">📝 Poem: My Beautiful Future</h3>
+        <div class="poem-box">
+          <p>
+            There's a path waiting for me to walk,<br>
+            With so many stories I'll get to talk.<br>
+            I don't know exactly where it will lead,<br>
+            But I'll take it step by step, with all my heart and deed.<br><br>
+
+            Some days might be sunny, some might feel gray,<br>
+            But I'll keep moving forward every single day.<br>
+            I'll chase my dreams, big and small,<br>
+            And rise again if I ever fall.<br><br>
+
+            I'll learn new things and meet new friends,<br>
+            Make memories that never end.<br>
+            I'll be kind, I'll be brave, I'll be true,<br>
+            And discover all that I can do.<br><br>
+
+            My future isn't written in stone, you see,<br>
+            It's something I build — just me, myself, and me.<br>
+            With hope in my heart and stars in my eyes,<br>
+            I know my future will be beautiful and bright. ✨
+          </p>
+        </div>
+      </article>
+
+      <article class="work">
+        <h3 class="work-title">✍️ Original Story: My Story</h3>
+        <div class="story-box">
+          <p>Everyone who knows me knows three things: I love everything girly, my favorite color is pink, and I can always be found watching one K-drama or another when I have free time. These aren't just hobbies — they're the little pieces that make up my happy world.</p>
+          <p>One evening, I was tidying my shelf and found a small pink box I'd completely forgotten about. Inside was an old notebook, its pages filled with my messy handwriting from years ago. I'd written all my simple wishes there — to be kind, to have good friends, to do something that makes me happy. I smiled because those were still exactly what I wanted.</p>
+          <p>That night, I watched a warm, sweet K-drama as usual. But this time, something felt different. I realized that my life wasn't waiting for some big, exciting story to start. It <em>was</em> the story. The quiet moments, the laughter with friends, the dreams I held close — they were all chapters being written right now. ✨</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Future -->
+    <section class="content-section" id="future" aria-labelledby="future-title">
+      <h2 id="future-title">🎓 My Future</h2>
+      <p>My future isn't just about me — it's all about the people around me. Growing up, I really wanted to be successful so I can help other people who need help — with food, a place to live, and their daily needs. I want to be someone who can share what I have with those who have less. 💝</p>
+      <p>Aside from that, my biggest dream is to <strong>become an attorney</strong>. I want to be everyone's voice — especially for those who feel like they don't have one. I want to stand for what is right, fight for justice, and inspire others to stand up and speak the truth too. I know law school will be hard, but I'm ready to work for it. Because when you truly care about something, the hard work is always worth it. ⚖️✨</p>
+    </section>
+
+    <!-- Achievements -->
+    <section class="content-section" id="achievements" aria-labelledby="achievements-title">
+      <h2 id="achievements-title">🏆 Achievements &amp; Memories</h2>
+      <p class="achievements-intro">✨ Every step forward, no matter how small, is still progress.</p>
+      <div class="memories-placeholder">
+        <div class="memory-card" aria-hidden="true">📷</div>
+        <div class="memory-card" aria-hidden="true">📷</div>
+        <div class="memory-card" aria-hidden="true">📷</div>
+        <div class="memory-card" aria-hidden="true">📷</div>
+        <div class="memory-card" aria-hidden="true">📷</div>
+      </div>
+      <p class="achievements-note">*Click here to add your own photos later!*</p>
+    </section>
+
+    <!-- Contact -->
+    <section class="content-section" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">💌 Contact Me</h2>
+      <div class="contact-info">
+        <p><strong>📍 Address:</strong> 149, Samuel St., Manuyo Dos, Las Piñas City</p>
+        <p><strong>📧 Email:</strong> <a href="mailto:jennicatatierra4@gmail.com">jennicatatierra4@gmail.com</a></p>
+        <p><strong>📱 Phone:</strong> <a href="tel:+639816097990">09816097990</a></p>
+        <p><strong>📸 Instagram:</strong> <a href="https://www.instagram.com/Jenbbdr" target="_blank" rel="noopener noreferrer">@Jenbbdr</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>💖 Thank you for visiting my portfolio! Wishing you a beautiful day ahead! 🌸✨</p>
+    <p class="copyright">© 2026 Jennica Tatierra</p>
+  </footer>
+</body>
+</html>
